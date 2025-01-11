@@ -4,6 +4,9 @@ const sessionMiddleware = require('./middleware/sessionMiddleware');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
 const userRoutes = require('./routes/userData');
+const projectRoutes = require('./routes/projectData');
+const createProject = require('./routes/createProject');
+const singleProjectRoutes = require('./routes/singleProject');
 
 
 const app = express();
@@ -23,7 +26,12 @@ app.use(cors());
 // Routes
 app.use('/auth', authRoutes);
 app.use('/dashboard', sessionMiddleware, dashboardRoutes);
-app.use('/', userRoutes)
+app.use('/', userRoutes);
+app.use('/', projectRoutes);
+app.use('/', createProject);
+app.use('/', singleProjectRoutes);
+
+
 
 // Start server
 const PORT = 3000;
