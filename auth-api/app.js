@@ -25,7 +25,7 @@ const cors = require('cors');
 app.use(cors());
 
 // simple hello world massege
-app.get('/message',(req,res)=>{
+app.get('/',(req,res)=>{
     res.json({
             message:"Hello World!"
     });
