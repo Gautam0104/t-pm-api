@@ -23,6 +23,14 @@ app.use(
 );
 const cors = require('cors');
 app.use(cors());
+
+// simple hello world massege
+app.get('/message',(req,res)=>{
+    res.json({
+            message:"Hello World!"
+    });
+})
+
 // Routes
 app.use('/auth', authRoutes);
 app.use('/dashboard', sessionMiddleware, dashboardRoutes);
