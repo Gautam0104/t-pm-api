@@ -4,7 +4,7 @@ const db = require('../config/db');
 
 router.post('/ticket',async(req,res)=>{
     try {
-         const {project_id, title, description, status, priority, created_by, due_date} = req.body;
+         const {project_id, title, description, status, priority, created_by, due_date, ticket_status} = req.body;
           // Handle undefined values
                 const projectId = project_id || null;
                 const ticketTitle = title || null;
@@ -13,11 +13,12 @@ router.post('/ticket',async(req,res)=>{
                 const ticketPriority = priority || null;
                 const createdBy = created_by || null;
                 const dueDate = due_date || 0;
+                const createStatus = ticket_status || null;
                 
          const query = `INSERT INTO tickets
-                        (project_id, title, description, status, priority, created_by, due_date, created_at, updated_at)
-                         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`;
-            const values = [projectId, ticketTitle, desc, ticketStatus, ticketPriority, createdBy, dueDate ];
+                        (project_id, title, description, status, priority, created_by, due_date, ticket_created_at, updated_at, ticket_status)
+                         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)`;
+            const values = [projectId, ticketTitle, desc, ticketStatus, ticketPriority, createdBy, dueDate, createStatus ];
           await db.execute(query,values);
           res.status(201).send('Ticket created successfully.');
       } catch (error) {

@@ -1,8 +1,8 @@
 const db = require('../config/db');
 
-async function createUser(username, password, first_name, last_name) {
+async function createUser(username, password, first_name, last_name, role_id) {
     const query = 'INSERT INTO users (username, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, ?)';
-    await db.execute(query, [username, password, first_name, last_name, 1]);
+    await db.execute(query, [username, password, first_name, last_name, role_id]);
 }
 
 async function findUserByUsername(username) {

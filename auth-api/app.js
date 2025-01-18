@@ -10,12 +10,20 @@ const singleProjectRoutes = require('./routes/singleProject');
 const deleteProjectRoutes = require('./routes/deleteProject');
 const createTicketRoutes =  require('./routes/createTicket');
 const updateTicketRoutes =  require('./routes/updateTicket');
-const getTicketRoutes =  require('./routes/getTicket')
+const getTicketRoutes    =  require('./routes/getTicket');
+const singleTicketRoutes = require('./routes/singleTicket');
+const deleteTicketRoutes = require('./routes/deleteTicket');
+const getticketbyidRoutes = require('./routes/getticketbyID');
+const updateticketstatusRoutes = require('./routes/updateticketStatus');
+const path = require('path');
+const calendarUpdateRoutes  =require('./routes/ticketcalendarUpdate');
+const createticketCalendarRoutes = require('./routes/createticketCaledar');
+
 
 
 const app = express();
 app.use(express.json());
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Session configuration
 app.use(
     session({
@@ -46,7 +54,13 @@ app.use('/', deleteProjectRoutes);
 app.use('/', createTicketRoutes);
 app.use('/', updateTicketRoutes);
 app.use('/', getTicketRoutes);
+app.use('/', singleTicketRoutes);
+app.use('/', deleteTicketRoutes);
+app.use('/', getticketbyidRoutes);
+app.use('/', updateticketstatusRoutes);
 
+app.use('/', calendarUpdateRoutes);
+app.use('/', createticketCalendarRoutes)
 
 // Start server
 const PORT = 3000;
