@@ -16,29 +16,42 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Update ticket route to handle multiple image uploads
-router.put('/updateticket', upload.array('images', 5), (req, res) => {
-    const { ticket_id, title, description, status, priority, ticket_status } = req.body;
+// Update ticket route to handle multiple image uploads and a single card_image
+router.put('/updateticket', upload.fields([
+    { name: 'images', maxCount: 5 }, // Multiple images
+    { name: 'card_image', maxCount: 1 } // Single card_image
+]), (req, res) => {
+    const { ticket_id, title, description, status, priority, due_date, ticket_status } = req.body;
 
     console.log('Files uploaded:', req.files);
     console.log('Request body:', req.body);
 
-    // Default to an empty array if no images were uploaded
-    const images = req.files && req.files.length > 0 ? req.files.map(file => file.filename) : null; // Set to null if no images
+    // Process uploaded images
+    const images = req.files['images'] && req.files['images'].length > 0
+        ? req.files['images'].map(file => file.filename)
+        : null; // Default to null if no images
 
-    if (ticket_id === undefined || title === undefined || description === undefined || status === undefined || priority === undefined || ticket_status === undefined) {
+    // Process uploaded card_image
+    const card_image = req.files['card_image'] && req.files['card_image'][0]
+        ? req.files['card_image'][0].filename
+        : null; // Default to null if no card_image
+
+    if (ticket_id === undefined || title === undefined || description === undefined || status === undefined || priority === undefined || due_date === undefined || ticket_status === undefined) {
         return res.status(400).json({ error: 'Ticket ID, title, description, status, priority, and ticket status are required.' });
     }
 
-    // If there are no files, set images to null
-    const query = 'UPDATE tickets SET title = ?, description = ?, status = ?, priority = ?, ticket_status = ?, images = ? WHERE ticket_id = ?';
+    const query = `
+        UPDATE tickets 
+        SET title = ?, description = ?, status = ?, priority = ?, due_date = ?, ticket_status = ?, images = ?, card_image = ?
+        WHERE ticket_id = ?
+    `;
 
     // Convert images array to JSON string to store in the database
     const imagesJson = images ? JSON.stringify(images) : null; // If images are null, set to null
 
-    console.log({ ticket_id, title, description, status, priority, ticket_status, images: imagesJson });
+    console.log({ ticket_id, title, description, status, priority, due_date, ticket_status, images: imagesJson, card_image });
 
-    db.execute(query, [title, description, status, priority, ticket_status, imagesJson, ticket_id])
+    db.execute(query, [title, description, status, priority, due_date, ticket_status, imagesJson, card_image, ticket_id])
         .then((results) => {
             if (results.affectedRows === 0) {
                 return res.status(404).json({ error: 'Ticket not found.' });
@@ -50,6 +63,5 @@ router.put('/updateticket', upload.array('images', 5), (req, res) => {
             res.status(500).json({ error: 'Database error' });
         });
 });
-
 
 module.exports = router;
