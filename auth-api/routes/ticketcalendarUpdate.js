@@ -6,13 +6,13 @@ router.put('/calendarUpdate', (req, res) => {
     const { ticket_id, title, description, due_date } = req.body;
 
     // Validate request body
-    if (!ticket_id || !title || !due_date || !description  ) {
-        return res.status(400).json({ error: 'All fields are required, including ticket_status.' });
+    if (!ticket_id || !title || !description || !due_date) {
+        return res.status(400).json({ error: 'All fields are required.' });
     }
 
     const query = `
         UPDATE tickets 
-        SET title = ?, description = ?, due_date = ?
+        SET title = ?, description = ?, due_date = ?, ticket_created_at = NOW()
         WHERE ticket_id = ?;
     `;
 

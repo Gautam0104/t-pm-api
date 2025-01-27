@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-router.get('/roles',async(req,res)=>{
+router.get('/GetRoles',async(req,res)=>{
     try {
         const [rows] = await db.query('SELECT * FROM roles');
         res.json(rows);

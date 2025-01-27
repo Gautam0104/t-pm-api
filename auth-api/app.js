@@ -18,6 +18,18 @@ const updateticketstatusRoutes = require('./routes/updateticketStatus');
 const path = require('path');
 const calendarUpdateRoutes  =require('./routes/ticketcalendarUpdate');
 const createticketCalendarRoutes = require('./routes/createticketCaledar');
+const createRoleRoutes = require("./routes/createRoles");
+const getRoleRoutes = require("./routes/getrole");
+const tickerHist = require("./routes/ticketHistory");
+const clearHistory = require("./routes/clearticketHistory");
+const deleteUserRoutes = require("./routes/deleteUser");
+const updateUserRoutes = require("./routes/updateUser");
+const getUserRoutes = require("./routes/getUser");
+const updateProjectRoutes = require("./routes/updateProject");
+const updateRoleRoutes = require("./routes/updateRole");
+const getrolehistoryRoutes  = require("./routes/getrolehistory");
+const deleteRoleRoutes = require("./routes/deleteRole");
+const clearroleHistoryRoutes = require("./routes/clearRolehistory")
 
 
 
@@ -58,9 +70,21 @@ app.use('/', singleTicketRoutes);
 app.use('/', deleteTicketRoutes);
 app.use('/', getticketbyidRoutes);
 app.use('/', updateticketstatusRoutes);
+app.use('/', getUserRoutes);
 
 app.use('/', calendarUpdateRoutes);
-app.use('/', createticketCalendarRoutes)
+app.use('/', createticketCalendarRoutes);
+app.use('/', createRoleRoutes);
+app.use('/', getRoleRoutes);
+app.use('/', tickerHist);
+app.use('/', clearHistory);
+app.use('/', deleteUserRoutes);
+app.use('/', updateUserRoutes);
+app.use('/', updateProjectRoutes);
+app.use('/', updateRoleRoutes);
+app.use('/', getrolehistoryRoutes);
+app.use('/', deleteRoleRoutes);
+app.use('/', clearroleHistoryRoutes);
 
 // Start server
 const PORT = 3000;
