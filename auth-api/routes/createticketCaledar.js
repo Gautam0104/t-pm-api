@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-router.post('/CalendarCreateTicket', (req, res) => {
+router.post('/calendar-create-ticket', (req, res) => {
     const { title, description, due_date, created_at } = req.body;
 
     // Validate request body

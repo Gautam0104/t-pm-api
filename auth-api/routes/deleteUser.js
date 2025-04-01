@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 
 // DELETE route for deleting a ticket by ID
-router.delete('/deleteUser/:user_id', async (req, res) => {
+router.delete('/delete-user/:user_id', async (req, res) => {
     const { user_id } = req.params;
 
     try {

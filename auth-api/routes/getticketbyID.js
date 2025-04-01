@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 //get single project data
-router.get('/ticketbyid/:id', async (req,res)=>{
+router.get('/ticket-by-id/:id', async (req,res)=>{
     try {
         const { id } = req.params;
 

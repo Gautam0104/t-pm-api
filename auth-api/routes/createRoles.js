@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-router.post('/CreateRoles', (req, res) => {
+router.post('/create-roles', (req, res) => {
     const { roleName} = req.body;
 
     // Validate request body

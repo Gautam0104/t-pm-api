@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-router.put('/updaterole/:role_id', async (req, res) => {
+router.put('/update-role/:role_id', async (req, res) => {
     const { role_name } = req.body;
     const { role_id } = req.params;
 

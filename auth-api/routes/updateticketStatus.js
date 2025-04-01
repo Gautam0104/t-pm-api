@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 //get single project data
-router.put('/updateticketStatus', (req, res) => {
+router.put('/update-ticket-status', (req, res) => {
     const { ticket_id, ticket_status } = req.body;
 
     // Check if any required field is undefined

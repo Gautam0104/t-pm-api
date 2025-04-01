@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-router.put('/updateproject/:project_id', async (req, res) => {
+router.put('/update-project/:project_id', async (req, res) => {
     const { project_name, description, project_status, project_type, total_eta } = req.body;
     const { project_id } = req.params;
 
